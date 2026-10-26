@@ -1,6 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package",
   "name": "@openvibe-ai/script",
+  "version": "1.20.1",
   "license": "MIT",
   "dependencies": {
     "semver": "^7.6.3"

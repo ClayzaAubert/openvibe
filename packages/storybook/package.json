@@ -1,6 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@openvibe-ai/storybook",
+  "version": "1.20.1",
   "private": true,
   "type": "module",
   "scripts": {
