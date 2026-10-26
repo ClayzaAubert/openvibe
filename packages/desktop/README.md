@@ -1,6 +1,6 @@
-# OpenCode Desktop
+# OpenVibe Desktop
 
-The OpenCode Desktop app, built with Electron.
+The OpenVibe Desktop app, built with Electron.
 
 ## Development
 

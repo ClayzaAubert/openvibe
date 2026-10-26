@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 
-import { Script } from "@opencode-ai/script"
+import { Script } from "@openvibe-ai/script"
 import { $ } from "bun"
 import { fileURLToPath } from "url"
 
@@ -36,7 +36,7 @@ if (Script.release && !Script.preview) {
 await prepareReleaseFiles()
 
 console.log("\n=== cli ===\n")
-await $`bun ./packages/opencode/script/publish.ts`
+await $`bun ./packages/openvibe/script/publish.ts`
 
 console.log("\n=== sdk ===\n")
 await $`bun ./packages/sdk/js/script/publish.ts`
@@ -66,6 +66,6 @@ if (Script.release && !Script.preview) {
 }
 
 if (Script.release) {
-  // OpenCode 1 clients resolve updates through GitHub's Latest release, so keep it on 1.x explicitly.
+  // OpenVibe 1 clients resolve updates through GitHub's Latest release, so keep it on 1.x explicitly.
   await $`gh release edit ${tag} --draft=false --latest --repo ${process.env.GH_REPO}`
 }

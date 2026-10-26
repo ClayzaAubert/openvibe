@@ -73,7 +73,7 @@ const models = [
 
 export default function Home() {
   const workspaceID = createAsync(() => checkLoggedIn())
-  const subscribeUrl = "https://opencode.ai/console/go"
+  const subscribeUrl = "https://openvibe.ai/console/go"
   const i18n = useI18n()
   const language = useLanguage()
   const [searchParams] = useSearchParams()
@@ -98,7 +98,7 @@ export default function Home() {
         content={`${i18n.t("go.meta.description")} ${i18n.t("go.plans.plus.description")}`}
       />
       <Meta name="twitter:image" content="/social-share-black.png" />
-      <Meta name="opencode:auth" content={workspaceID() ? "true" : "false"} />
+      <Meta name="openvibe:auth" content={workspaceID() ? "true" : "false"} />
 
       <div data-component="container">
         <Header go hideGetStarted />

@@ -7,7 +7,7 @@ import { SECRET } from "./secret"
 ////////////////
 
 const cluster = planetscale.getDatabaseOutput({
-  name: "opencode",
+  name: "openvibe",
   organization: "anomalyco",
 })
 
@@ -102,7 +102,7 @@ export const stripeWebhook = new stripe.WebhookEndpoint("StripeWebhookEndpoint",
 })
 
 const zenLiteProduct = new stripe.Product("ZenLite", {
-  name: "OpenCode Go",
+  name: "OpenVibe Go",
 })
 const zenLiteCouponFirstMonth50 = new stripe.Coupon("ZenLiteCouponFirstMonth50", {
   name: "First month 50% off",
@@ -161,7 +161,7 @@ const ZEN_LITE_PRICE = new sst.Linkable("ZEN_LITE_PRICE", {
 })
 
 const zenBlackProduct = new stripe.Product("ZenBlack", {
-  name: "OpenCode Black",
+  name: "OpenVibe Black",
 })
 const zenBlackPriceProps = {
   product: zenBlackProduct.id,
@@ -222,7 +222,7 @@ const AUTH_API_URL = new sst.Linkable("AUTH_API_URL", {
 })
 // Preview branches have independent databases; do not send their workspaces to shared dev.
 const migrationDomain =
-  $app.stage === "production" ? "opencode.ai" : $app.stage === "dev" ? "dev.opencode.ai" : undefined
+  $app.stage === "production" ? "openvibe.ai" : $app.stage === "dev" ? "dev.openvibe.ai" : undefined
 const consoleMigration = new sst.Linkable("ConsoleMigration", {
   properties: {
     consoleUrl: migrationDomain ? `https://${migrationDomain}/console` : "",

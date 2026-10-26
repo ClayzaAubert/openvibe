@@ -45,7 +45,8 @@ function providerIconsPlugin() {
 }
 
 async function fetchProviderIcons() {
-  const url = process.env.OPENCODE_MODELS_URL || "https://models.opencode.ai"
+  const url = process.env.OPENVIBE_MODELS_URL
+  if (!url) throw new Error("OPENVIBE_MODELS_URL is required to fetch provider icons")
   const providers = await fetch(`${url}/api.json`)
     .then((res) => res.json())
     .then((json) => Object.keys(json))

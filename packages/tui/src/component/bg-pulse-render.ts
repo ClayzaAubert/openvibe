@@ -1,5 +1,5 @@
 import { OptimizedBuffer, RGBA, TextAttributes } from "@opentui/core"
-import { go } from "../logo"
+import { ov } from "../logo"
 
 const PERIOD = 4600
 const RINGS = 3
@@ -9,12 +9,12 @@ const AMP = 0.55
 const TAIL_AMP = 0.16
 const BREATH_AMP = 0.05
 const BREATH_SPEED = 0.0008
-// Offset so the bg ring emits from the estimated GO center when the logo shimmer peaks.
+// Offset so the bg ring emits from the estimated OV center when the logo shimmer peaks.
 const PHASE_OFFSET = 0.29
 const LOGO_GAP = 1
 const LOGO_TOP_BIAS = -1
-const LOGO_LEFT_WIDTH = go.left[0]?.length ?? 0
-const LOGO_LINES = go.left.map((line, index) => line + " ".repeat(LOGO_GAP) + go.right[index])
+const LOGO_LEFT_WIDTH = ov.left[0]?.length ?? 0
+const LOGO_LINES = ov.left.map((line, index) => line + " ".repeat(LOGO_GAP) + ov.right[index])
 const LOGO_WIDTH = LOGO_LINES[0]?.length ?? 0
 const LOGO_HEIGHT = LOGO_LINES.length
 const SPACE = " ".codePointAt(0)!

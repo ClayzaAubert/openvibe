@@ -1,6 +1,6 @@
 import type { ServerApi } from "./server"
 import type { ServerProtocol } from "./server-protocol"
-import type { AgentPartInput, FilePartInput, OpencodeClient, Session, TextPartInput } from "@opencode-ai/sdk/v2/client"
+import type { AgentPartInput, FilePartInput, OpenvibeClient, Session, TextPartInput } from "@openvibe-ai/sdk/v2/client"
 import type {
   Project,
   ProjectCurrent,
@@ -14,9 +14,9 @@ import type {
   SessionPromptOutput,
   SessionShellInput,
   SessionShellOutput,
-} from "@opencode-ai/client/promise"
+} from "@openvibe-ai/client/promise"
 
-type LegacyClient = OpencodeClient
+type LegacyClient = OpenvibeClient
 type LegacyFor = (directory?: string) => LegacyClient
 type CompatibleSessionApi = Omit<
   SessionApi,
@@ -378,17 +378,11 @@ function createV1Api(input: CompatibleInput): CompatibleApi {
     integration: {
       ...input.current.integration,
       async get(value: Parameters<ServerApi["integration"]["get"]>[0]) {
-        const methods = ((await legacy(value.location).provider.auth()).data?.[value.integrationID] ?? []).map(
-          (method, index) =>
-            method.type === "api"
-              ? { type: "key" as const, label: method.label }
-              : { type: "oauth" as const, id: String(index), label: method.label, prompts: method.prompts },
-        )
         return located(
           {
             id: value.integrationID,
             name: value.integrationID,
-            methods,
+            methods: [],
             connections: [],
           },
           value.location,
@@ -396,56 +390,17 @@ function createV1Api(input: CompatibleInput): CompatibleApi {
       },
       connect: {
         ...input.current.integration.connect,
-        key: async (value: Parameters<ServerApi["integration"]["connect"]["key"]>[0]) => {
-          await legacy(value.location).auth.set({
-            providerID: value.integrationID,
-            auth: { type: "api", key: value.key },
-          })
-          await legacy(value.location).instance.dispose()
-          await input.legacy().instance.dispose()
-        },
       },
       oauth: {
         ...input.current.integration.oauth,
         connect: async (value: Parameters<ServerApi["integration"]["oauth"]["connect"]>[0]) => {
-          const method = Number(value.methodID)
-          const result = await legacy(value.location).provider.oauth.authorize(
-            { providerID: value.integrationID, method, inputs: value.inputs },
-            { throwOnError: true },
-          )
-          if (!result.data) throw new Error("Failed to start OAuth authorization")
-          return located(
-            {
-              attemptID: `${value.integrationID}:${method}`,
-              url: result.data.url,
-              instructions: result.data.instructions,
-              mode: result.data.method,
-              time: { created: Date.now(), expires: Date.now() + 10 * 60 * 1000 },
-            },
-            value.location,
-          )
+          throw new Error("Provider authentication is disabled")
         },
         complete: async (value: Parameters<ServerApi["integration"]["oauth"]["complete"]>[0]) => {
-          const method = Number(value.attemptID.split(":").at(-1))
-          await legacy(value.location).provider.oauth.callback(
-            { providerID: value.integrationID, method, code: value.code },
-            { throwOnError: true },
-          )
-          await legacy(value.location).instance.dispose()
-          await input.legacy().instance.dispose()
+          throw new Error("Provider authentication is disabled")
         },
         status: async (value: Parameters<ServerApi["integration"]["oauth"]["status"]>[0]) => {
-          const method = Number(value.attemptID.split(":").at(-1))
-          await legacy(value.location).provider.oauth.callback(
-            { providerID: value.integrationID, method },
-            { throwOnError: true },
-          )
-          await legacy(value.location).instance.dispose()
-          await input.legacy().instance.dispose()
-          return located(
-            { status: "complete" as const, time: { created: Date.now(), expires: Date.now() } },
-            value.location,
-          )
+          throw new Error("Provider authentication is disabled")
         },
       },
     },

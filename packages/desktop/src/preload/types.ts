@@ -1,20 +1,19 @@
-import type { DesktopMenuAction } from "@opencode-ai/app/desktop-menu"
-import type { WslServersPlatform } from "@opencode-ai/app/wsl/types"
-import type { UpdaterState } from "@opencode-ai/app/updater"
-import type { DesktopNativeBundle } from "@opencode-ai/app/i18n/desktop-native"
+import type { DesktopMenuAction } from "@openvibe-ai/app/desktop-menu"
+import type { WslServersPlatform } from "@openvibe-ai/app/wsl/types"
+import type { DesktopNativeBundle } from "@openvibe-ai/app/i18n/desktop-native"
 export type {
   WslDistroProbe,
   WslInstalledDistro,
   WslJob,
   WslOnlineDistro,
-  WslOpencodeCheck,
+  WslOpenvibeCheck,
   WslRuntimeCheck,
   WslServerConfig,
   WslServerItem,
   WslServerRuntime,
   WslServersEvent,
   WslServersState,
-} from "@opencode-ai/app/wsl/types"
+} from "@openvibe-ai/app/wsl/types"
 
 export type ServerReadyData = {
   url: string
@@ -23,12 +22,6 @@ export type ServerReadyData = {
 }
 
 export type WslServersAPI = WslServersPlatform
-export type UpdaterAPI = {
-  subscribe: (cb: (state: UpdaterState) => void) => Promise<() => void>
-  check: () => Promise<UpdaterState>
-  install: () => Promise<void>
-}
-
 export type LinuxDisplayBackend = "wayland" | "auto"
 export type TitlebarTheme = {
   mode: "light" | "dark"
@@ -47,7 +40,6 @@ export type ElectronAPI = {
   installCli: () => Promise<string>
   awaitInitialization: () => Promise<ServerReadyData>
   wslServers: WslServersAPI
-  updater: UpdaterAPI
   consumeInitialDeepLinks: () => Promise<string[]>
   getDefaultServerUrl: () => Promise<string | null>
   setDefaultServerUrl: (url: string | null) => Promise<void>

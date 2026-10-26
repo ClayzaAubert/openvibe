@@ -1,0 +1,4 @@
+{
+  "$schema": "https://openvibe.ai/config.json",
+  "model": "anthropic/claude-sonnet"
+}

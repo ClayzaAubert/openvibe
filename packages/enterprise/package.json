@@ -1,6 +1,6 @@
 {
-  "name": "@opencode-ai/enterprise",
-  "version": "1.19.4",
+  "name": "@openvibe-ai/enterprise",
+  "version": "1.20.1",
   "private": true,
   "type": "module",
   "license": "MIT",
@@ -8,14 +8,14 @@
     "typecheck": "tsgo --noEmit",
     "dev": "vite dev",
     "build": "vite build",
-    "build:cloudflare": "OPENCODE_DEPLOYMENT_TARGET=cloudflare vite build",
+    "build:cloudflare": "OPENVIBE_DEPLOYMENT_TARGET=cloudflare vite build",
     "start": "vite start",
     "shell-prod": "sst shell --target Teams --stage production"
   },
   "dependencies": {
-    "@opencode-ai/core": "workspace:*",
-    "@opencode-ai/session-ui": "workspace:*",
-    "@opencode-ai/ui": "workspace:*",
+    "@openvibe-ai/core": "workspace:*",
+    "@openvibe-ai/session-ui": "workspace:*",
+    "@openvibe-ai/ui": "workspace:*",
     "aws4fetch": "^1.0.20",
     "@pierre/diffs": "catalog:",
     "@solidjs/router": "catalog:",

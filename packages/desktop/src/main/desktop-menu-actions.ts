@@ -1,9 +1,8 @@
 import { BrowserWindow } from "electron"
-import type { DesktopMenuAction } from "@opencode-ai/app/desktop-menu"
+import type { DesktopMenuAction } from "@openvibe-ai/app/desktop-menu"
 import { createMainWindow, updateTitlebar } from "./windows"
 
 export type DesktopMenuActionHandlers = Partial<{
-  checkForUpdates: () => void
   relaunch: () => void
 }>
 
@@ -13,9 +12,6 @@ export function runDesktopMenuAction(
   handlers: DesktopMenuActionHandlers = {},
 ) {
   switch (action) {
-    case "app.checkForUpdates":
-      handlers.checkForUpdates?.()
-      return
     case "app.relaunch":
       handlers.relaunch?.()
       return

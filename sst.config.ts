@@ -3,7 +3,7 @@
 export default $config({
   app(input) {
     return {
-      name: "opencode",
+      name: "openvibe",
       removal: input?.stage === "production" ? "retain" : "remove",
       protect: ["production"].includes(input?.stage),
       home: "cloudflare",
@@ -17,8 +17,8 @@ export default $config({
                 profile: process.env.GITHUB_ACTIONS
                   ? undefined
                   : input.stage === "production"
-                    ? "opencode-production"
-                    : "opencode-dev",
+                    ? "openvibe-production"
+                    : "openvibe-dev",
               },
               stripe: {
                 version: "0.0.28",
@@ -34,7 +34,7 @@ export default $config({
     // The v1 branch only serves the V1 web app; everything else deploys from dev and production.
     if ($app.stage === "v1") {
       const app = new sst.cloudflare.StaticSite("WebApp", {
-        domain: "app.opencode.ai",
+        domain: "app.openvibe.ai",
         path: "packages/app",
         build: {
           command: "bun turbo build",

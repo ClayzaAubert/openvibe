@@ -1,14 +1,5 @@
 import { contextBridge, ipcRenderer, webUtils } from "electron"
 import type { ElectronAPI, WslServersEvent } from "./types"
-import type { UpdaterState } from "@opencode-ai/app/updater"
-
-const updaterCallbacks = new Set<(state: UpdaterState) => void>()
-let updaterState: UpdaterState | undefined
-let updaterSubscription: Promise<void> | undefined
-const updaterHandler = (_: unknown, state: UpdaterState) => {
-  updaterState = state
-  updaterCallbacks.forEach((callback) => callback(state))
-}
 
 const api: ElectronAPI = {
   killSidecar: () => ipcRenderer.invoke("kill-sidecar"),
@@ -30,31 +21,11 @@ const api: ElectronAPI = {
     installWsl: () => ipcRenderer.invoke("wsl-servers-install-wsl"),
     installDistro: (name) => ipcRenderer.invoke("wsl-servers-install-distro", name),
     probeAddable: (distros) => ipcRenderer.invoke("wsl-servers-probe-addable", distros),
-    installOpencode: (name) => ipcRenderer.invoke("wsl-servers-install-opencode", name),
+    installOpenvibe: (name) => ipcRenderer.invoke("wsl-servers-install-openvibe", name),
     openTerminal: (name) => ipcRenderer.invoke("wsl-servers-open-terminal", name),
     addServer: (distro) => ipcRenderer.invoke("wsl-servers-add", distro),
     removeServer: (id) => ipcRenderer.invoke("wsl-servers-remove", id),
     startServer: (id) => ipcRenderer.invoke("wsl-servers-start", id),
-  },
-  updater: {
-    subscribe: async (cb) => {
-      updaterCallbacks.add(cb)
-      if (updaterState) cb(updaterState)
-      if (!updaterSubscription) {
-        ipcRenderer.on("updater-state", updaterHandler)
-        updaterSubscription = ipcRenderer.invoke("updater-subscribe")
-      }
-      await updaterSubscription
-      return () => {
-        updaterCallbacks.delete(cb)
-        if (updaterCallbacks.size > 0) return
-        ipcRenderer.removeListener("updater-state", updaterHandler)
-        updaterSubscription = undefined
-        void ipcRenderer.invoke("updater-unsubscribe")
-      }
-    },
-    check: () => ipcRenderer.invoke("updater-check"),
-    install: () => ipcRenderer.invoke("updater-install"),
   },
   consumeInitialDeepLinks: () => ipcRenderer.invoke("consume-initial-deep-links"),
   getDefaultServerUrl: () => ipcRenderer.invoke("get-default-server-url"),

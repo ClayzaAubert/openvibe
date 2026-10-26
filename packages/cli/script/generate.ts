@@ -1,4 +1,5 @@
-const modelsUrl = process.env.OPENCODE_MODELS_URL || "https://models.opencode.ai"
+const modelsUrl = process.env.OPENVIBE_MODELS_URL
+if (!modelsUrl) throw new Error("OPENVIBE_MODELS_URL is required")
 
 export const modelsData = process.env.MODELS_DEV_API_JSON
   ? await Bun.file(process.env.MODELS_DEV_API_JSON).text()

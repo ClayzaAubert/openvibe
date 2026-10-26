@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@opencode-ai/stats-core",
-  "version": "1.19.4",
+  "name": "@openvibe-ai/stats-core",
+  "version": "1.20.1",
   "private": true,
   "type": "module",
   "license": "MIT",

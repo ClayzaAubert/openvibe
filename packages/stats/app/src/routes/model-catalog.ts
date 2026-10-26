@@ -1,9 +1,9 @@
-import { STEALTH_MODELS, statModel } from "@opencode-ai/stats-core/domain/model-normalization"
+import { STEALTH_MODELS, statModel } from "@openvibe-ai/stats-core/domain/model-normalization"
 import { query } from "@solidjs/router"
 
-export const modelCatalogSourceUrl = "https://models.opencode.ai/catalog.json"
-export const modelCatalogPricingUrl = "https://models.opencode.ai/api.json"
-export const modelCatalogLabSourceUrl = "https://models.opencode.ai/labs"
+export const modelCatalogSourceUrl = "https://models.dev/catalog.json"
+export const modelCatalogPricingUrl = "https://models.dev/api.json"
+export const modelCatalogLabSourceUrl = "https://models.dev/labs"
 
 export type ModelCatalogCost = {
   input: number
@@ -58,7 +58,7 @@ export type ModelCatalog = {
   models: ModelCatalogEntry[]
   aliases?: ModelCatalogEntry[]
   labs: ModelCatalogLab[]
-  // Stealth models stay out of the lab catalog, but their OpenCode listings publish limits and modalities.
+  // Stealth models stay out of the lab catalog, but their OpenVibe listings publish limits and modalities.
   stealthSpecs: Record<string, ModelCatalogSpecs>
 }
 
@@ -244,29 +244,8 @@ export function buildModelCatalog(payload: unknown, pricingPayload?: unknown, la
   }
 }
 
-function readStealthModelSpecs(payload: unknown): Record<string, ModelCatalogSpecs> {
-  if (!isRecord(payload)) return {}
-  return Object.fromEntries(
-    // Later entries win, so the opencode listing takes precedence over opencode-go.
-    ["opencode-go", "opencode"]
-      .map((provider) => payload[provider])
-      .flatMap((provider) => (isRecord(provider) && isRecord(provider.models) ? Object.entries(provider.models) : []))
-      .flatMap(([id, value]) => {
-        const model = statModel(id, undefined)
-        if (!STEALTH_MODELS.has(model) || !isRecord(value)) return []
-        return [
-          [
-            model,
-            {
-              knowledge: stringValue(value.knowledge),
-              releaseDate: stringValue(value.release_date),
-              limit: readCatalogLimit(value.limit),
-              modalities: readCatalogModalities(value.modalities),
-            },
-          ] as const,
-        ]
-      }),
-  )
+function readStealthModelSpecs(_payload: unknown): Record<string, ModelCatalogSpecs> {
+  return {}
 }
 
 function readModelCatalogEntry(value: unknown): ModelCatalogEntry[] {

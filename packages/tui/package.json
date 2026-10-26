@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@opencode-ai/tui",
-  "version": "1.19.4",
+  "name": "@openvibe-ai/tui",
+  "version": "1.20.1",
   "private": true,
   "type": "module",
   "license": "MIT",
@@ -48,10 +48,10 @@
     "./component/register-spinner": "./src/component/register-spinner.ts"
   },
   "dependencies": {
-    "@opencode-ai/core": "workspace:*",
-    "@opencode-ai/plugin": "workspace:*",
-    "@opencode-ai/sdk": "workspace:*",
-    "@opencode-ai/ui": "workspace:*",
+    "@openvibe-ai/core": "workspace:*",
+    "@openvibe-ai/plugin": "workspace:*",
+    "@openvibe-ai/sdk": "workspace:*",
+    "@openvibe-ai/ui": "workspace:*",
     "@opentui/core": "catalog:",
     "@opentui/keymap": "catalog:",
     "@opentui/solid": "catalog:",

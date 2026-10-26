@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=OpenVibe
+Exec=/opt/OpenVibe/ai.openvibe.desktop %U
+Terminal=false
+Type=Application
+Icon=ai.openvibe.desktop
+StartupWMClass=ai.openvibe.desktop
+NoDisplay=true
+Comment=Open source AI coding agent
+Categories=Development;

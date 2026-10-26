@@ -12,7 +12,6 @@ import { useEditorContext } from "../context/editor"
 import { useTerminalDimensions } from "@opentui/solid"
 import { useTuiConfig } from "../config"
 import { HomeSessionDestinationProvider } from "./home/session-destination"
-import { useUpdateNotification } from "../context/update-notification"
 import { useTheme } from "../context/theme"
 import { useExit } from "../context/exit"
 
@@ -87,7 +86,6 @@ export function Home() {
           </pluginRuntime.Slot>
         </box>
         <box height={1} minHeight={0} flexShrink={1} />
-        <UpdateNotification width={logoWidth()} />
         <box width="100%" maxWidth={promptMaxWidth()} zIndex={1000} paddingTop={1} flexShrink={0}>
           <pluginRuntime.Slot name="home_prompt" mode="replace" ref={bind}>
             <Prompt ref={bind} right={<pluginRuntime.Slot name="home_prompt_right" />} placeholders={placeholder} />
@@ -101,49 +99,5 @@ export function Home() {
         <pluginRuntime.Slot name="home_footer" mode="single_winner" />
       </box>
     </HomeSessionDestinationProvider>
-  )
-}
-
-function UpdateNotification(props: { width: number }) {
-  const update = useUpdateNotification()
-  const exit = useExit()
-  const { theme } = useTheme()
-  const [hovered, setHovered] = createSignal(false)
-  createEffect(() => {
-    update.notification()
-    setHovered(false)
-  })
-
-  return (
-    <Show when={update.notification()} keyed>
-      {(state) => (
-        <box
-          flexShrink={0}
-          flexDirection="row"
-          justifyContent="center"
-          width={props.width}
-          maxWidth="100%"
-          gap={1}
-          backgroundColor={hovered() ? theme.backgroundElement : undefined}
-          onMouseOver={() => setHovered(true)}
-          onMouseOut={() => setHovered(false)}
-          onMouseUp={() => {
-            if (state.type === "installed") return exit()
-            update.open?.()
-          }}
-        >
-          <text fg={theme.textMuted}>
-            <span style={{ fg: theme.primary }}>{state.type === "installed" ? "/exit" : "/update"}</span>
-            {state.type === "available"
-              ? ` to install v${state.version}`
-              : state.type === "major"
-                ? " to upgrade to OpenCode 2.0"
-                : state.target.type === "major"
-                  ? " restart to use OpenCode 2.0"
-                  : ` restart to use v${state.target.version}`}
-          </text>
-        </box>
-      )}
-    </Show>
   )
 }

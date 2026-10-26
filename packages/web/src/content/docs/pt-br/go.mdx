@@ -8,16 +8,16 @@ import { Tabs, TabItem } from "@astrojs/starlight/components"
 export const console = config.console
 export const email = `mailto:${config.email}`
 
-O OpenCode Go oferece acesso confiável a modelos abertos de programação populares, com dois planos mensais:
+O OpenVibe Go oferece acesso confiável a modelos abertos de programação populares, com dois planos mensais:
 
 | Plano       | Preço       | Uso incluído                                     |
 | ----------- | ----------- | ------------------------------------------------ |
 | **Go**      | **$10/mês** | Acesso de menor custo aos modelos abaixo         |
 | **Go Plus** | **$40/mês** | Limites de uso mais altos para os modelos abaixo |
 
-O Go funciona como qualquer outro provedor no OpenCode. Você assina o OpenCode Go e
+O Go funciona como qualquer outro provedor no OpenVibe. Você assina o OpenVibe Go e
 obtém a sua chave de API. Ele é **totalmente opcional** e você não precisa usá-lo para
-usar o OpenCode.
+usar o OpenVibe.
 
 O serviço foi projetado principalmente para usuários internacionais e oferece acesso global estável.
 
@@ -33,7 +33,7 @@ No entanto, obter acesso confiável e de baixa latência a eles pode ser difíci
 variam em qualidade e disponibilidade.
 
 :::tip
-Testamos um grupo selecionado de modelos e provedores que funcionam bem com o OpenCode.
+Testamos um grupo selecionado de modelos e provedores que funcionam bem com o OpenVibe.
 :::
 
 Para resolver isso, fizemos algumas coisas:
@@ -52,16 +52,16 @@ Tanto o Go quanto o Go Plus dão acesso a esses modelos; escolha o plano adequad
 
 ## Como funciona
 
-O OpenCode Go funciona como qualquer outro provedor no OpenCode.
+O OpenVibe Go funciona como qualquer outro provedor no OpenVibe.
 
-1. Entre no **<a href={console}>OpenCode Console</a>**, assine o Go ou o Go Plus e
+1. Entre no **<a href={console}>OpenVibe Console</a>**, assine o Go ou o Go Plus e
    copie a sua chave de API.
-2. Execute o comando `/connect` na TUI, selecione `OpenCode Go` e cole
+2. Execute o comando `/connect` na TUI, selecione `OpenVibe Go` e cole
    a sua chave de API.
 3. Execute `/models` na TUI para ver a lista de modelos disponíveis através do Go.
 
 :::note
-Apenas um membro por workspace pode assinar o OpenCode Go ou o Go Plus.
+Apenas um membro por workspace pode assinar o OpenVibe Go ou o Go Plus.
 :::
 
 A lista atual de modelos inclui:
@@ -105,7 +105,7 @@ A lista de modelos pode mudar conforme testamos e adicionamos novos.
 
 ## Onde posso usá-lo?
 
-O OpenCode Go foi projetado para o [OpenCode](https://opencode.ai) e outros agentes de programação
+O OpenVibe Go foi projetado para o [OpenVibe](https://openvibe.ai) e outros agentes de programação
 que produzem tipos semelhantes de requisições. O tráfego é monitorado para detectar abusos que
 prejudiquem a experiência de outros usuários.
 
@@ -114,23 +114,23 @@ Seu cliente deve:
 1. Enviar o tráfego típico de um agente de programação
 2. Identificar-se com seu próprio user agent, como `my-coding-agent/1.0`, em vez
    do nome genérico de um SDK ou de uma biblioteca HTTP.
-3. Enviar um ID de sessão estável em `x-opencode-session` para cada conversa, para que possamos otimizar o roteamento e
+3. Enviar um ID de sessão estável em `x-openvibe-session` para cada conversa, para que possamos otimizar o roteamento e
    o cache de prompts.
 
 ### Clientes validados
 
-Além do OpenCode, os clientes a seguir foram validados para funcionar corretamente
-com o OpenCode Go. No entanto, não garantimos que continuarão funcionando no futuro.
+Além do OpenVibe, os clientes a seguir foram validados para funcionar corretamente
+com o OpenVibe Go. No entanto, não garantimos que continuarão funcionando no futuro.
 
 | Cliente           | Suporte a sessões                                                                                                                                                                                                                                                   |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Hermes**        | As builds que contêm [PR #101864](https://github.com/NousResearch/hermes-agent/pull/101864) enviam o header nas requisições principais e auxiliares do OpenCode. A correção foi incorporada após a v0.21.0; essa versão por si só não a inclui.                     |
+| **Hermes**        | As builds que contêm [PR #101864](https://github.com/NousResearch/hermes-agent/pull/101864) enviam o header nas requisições principais e auxiliares do OpenVibe. A correção foi incorporada após a v0.21.0; essa versão por si só não a inclui.                     |
 | **Claude Code**   | O Go reconhece seu header de sessão nativo. Não é necessário usar um wrapper para headers personalizados.                                                                                                                                                           |
 | **Codex**         | O Go reconhece seu header de sessão nativo. Algumas versões e configurações de proxy ainda o omitem; preserve o header de sessão ao encaminhar requisições.                                                                                                         |
-| **ZCode**         | O Go reconhece seu header de sessão nativo. Nossa [solicitação de `x-opencode-session`](https://github.com/zai-org/feedback/issues/492) continua aberta, mas não é mais necessário enviar especificamente esse header.                                              |
-| **Pi**            | As builds atuais enviam informações de sessão para o OpenCode. Atualize instalações mais antigas.                                                                                                                                                                   |
+| **ZCode**         | O Go reconhece seu header de sessão nativo. Nossa [solicitação de `x-openvibe-session`](https://github.com/zai-org/feedback/issues/492) continua aberta, mas não é mais necessário enviar especificamente esse header.                                              |
+| **Pi**            | As builds atuais enviam informações de sessão para o OpenVibe. Atualize instalações mais antigas.                                                                                                                                                                   |
 | **jcode**         | Atualize para a versão **v0.81.6 ou posterior**, que inclui a [correção do header de sessão](https://github.com/1jehuang/jcode/issues/1167).                                                                                                                        |
-| **Kilo Code CLI** | As builds que contêm [PR #13752](https://github.com/Kilo-Org/kilocode/pull/13752) restauram os headers de sessão do OpenCode. Essa correção abrange a CLI, não a extensão do VS Code. Consulte a [issue #13723](https://github.com/Kilo-Org/kilocode/issues/13723). |
+| **Kilo Code CLI** | As builds que contêm [PR #13752](https://github.com/Kilo-Org/kilocode/pull/13752) restauram os headers de sessão do OpenVibe. Essa correção abrange a CLI, não a extensão do VS Code. Consulte a [issue #13723](https://github.com/Kilo-Org/kilocode/issues/13723). |
 
 ### Clientes com problemas conhecidos
 
@@ -414,42 +414,42 @@ Você também pode acessar os modelos do Go através dos seguintes endpoints de 
 
 | Modelo                       | ID do modelo                 | Endpoint                                         | Pacote do AI SDK            |
 | ---------------------------- | ---------------------------- | ------------------------------------------------ | --------------------------- |
-| Grok 4.7                     | grok-4.7                     | `https://opencode.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
-| Grok 4.6                     | grok-4.6                     | `https://opencode.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
-| GPT 6 Luna                   | gpt-6-luna                   | `https://opencode.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
-| GPT 5.6 Luna                 | gpt-5.6-luna                 | `https://opencode.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
-| Claude Haiku 5.5             | claude-haiku-5-5             | `https://opencode.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
-| GLM-5.3-Flash                | glm-5.3-flash                | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| GLM-5.3                      | glm-5.3                      | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| GLM-5.2                      | glm-5.2                      | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| Kimi K3                      | kimi-k3                      | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| Kimi K2.7 Code               | kimi-k2.7-code               | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| Kimi K2.6                    | kimi-k2.6                    | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| LongCat-2.0                  | longcat-2.0                  | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| LongCat 2.5 Preview Free     | longcat-2.5-preview-free     | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| Step 5 Preview Free          | step-5-preview-free          | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| DeepSeek V4.1 Flash          | deepseek-v4.1-flash          | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| DeepSeek V4 Pro              | deepseek-v4-pro              | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| DeepSeek V4 Flash            | deepseek-v4-flash            | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| DeepSeek V4 Flash Vision Exp | deepseek-v4-flash-vision-exp | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| MiMo-V2.6-Flash              | mimo-v2.6-flash              | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| MiMo-V2.6-Pro                | mimo-v2.6-pro                | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| MiMo-V2.5                    | mimo-v2.5                    | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| MiMo-V2.5-Pro                | mimo-v2.5-pro                | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| MiniMax M3                   | minimax-m3                   | `https://opencode.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
-| MiniMax M2.7                 | minimax-m2.7                 | `https://opencode.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
-| Muse Spark 1.3 Contributor   | muse-spark-1.3-contributor   | `https://opencode.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
-| Muse Spark 1.2 Contributor   | muse-spark-1.2-contributor   | `https://opencode.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
-| Qwen3.8 Max                  | qwen3.8-max                  | `https://opencode.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
-| Qwen3.8 Flash                | qwen3.8-flash                | `https://opencode.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
-| Qwen3.7 Plus                 | qwen3.7-plus                 | `https://opencode.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
-| Hy4 preview                  | hy4-preview                  | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| Hy3                          | hy3                          | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
-| Space Bunny                  | space-bunny                  | `https://opencode.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| Grok 4.7                     | grok-4.7                     | `https://openvibe.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
+| Grok 4.6                     | grok-4.6                     | `https://openvibe.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
+| GPT 6 Luna                   | gpt-6-luna                   | `https://openvibe.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
+| GPT 5.6 Luna                 | gpt-5.6-luna                 | `https://openvibe.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
+| Claude Haiku 5.5             | claude-haiku-5-5             | `https://openvibe.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
+| GLM-5.3-Flash                | glm-5.3-flash                | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| GLM-5.3                      | glm-5.3                      | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| GLM-5.2                      | glm-5.2                      | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| Kimi K3                      | kimi-k3                      | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| Kimi K2.7 Code               | kimi-k2.7-code               | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| Kimi K2.6                    | kimi-k2.6                    | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| LongCat-2.0                  | longcat-2.0                  | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| LongCat 2.5 Preview Free     | longcat-2.5-preview-free     | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| Step 5 Preview Free          | step-5-preview-free          | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| DeepSeek V4.1 Flash          | deepseek-v4.1-flash          | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| DeepSeek V4 Pro              | deepseek-v4-pro              | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| DeepSeek V4 Flash            | deepseek-v4-flash            | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| DeepSeek V4 Flash Vision Exp | deepseek-v4-flash-vision-exp | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| MiMo-V2.6-Flash              | mimo-v2.6-flash              | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| MiMo-V2.6-Pro                | mimo-v2.6-pro                | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| MiMo-V2.5                    | mimo-v2.5                    | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| MiMo-V2.5-Pro                | mimo-v2.5-pro                | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| MiniMax M3                   | minimax-m3                   | `https://openvibe.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
+| MiniMax M2.7                 | minimax-m2.7                 | `https://openvibe.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
+| Muse Spark 1.3 Contributor   | muse-spark-1.3-contributor   | `https://openvibe.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
+| Muse Spark 1.2 Contributor   | muse-spark-1.2-contributor   | `https://openvibe.ai/zen/go/v1/responses`        | `@ai-sdk/openai`            |
+| Qwen3.8 Max                  | qwen3.8-max                  | `https://openvibe.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
+| Qwen3.8 Flash                | qwen3.8-flash                | `https://openvibe.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
+| Qwen3.7 Plus                 | qwen3.7-plus                 | `https://openvibe.ai/zen/go/v1/messages`         | `@ai-sdk/anthropic`         |
+| Hy4 preview                  | hy4-preview                  | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| Hy3                          | hy3                          | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
+| Space Bunny                  | space-bunny                  | `https://openvibe.ai/zen/go/v1/chat/completions` | `@ai-sdk/openai-compatible` |
 
-O [ID do modelo](/docs/config/#models) na configuração do OpenCode
-usa o formato `opencode-go/<model-id>`. Por exemplo, para o Kimi K3, você usaria
-`opencode-go/kimi-k3` na configuração.
+O [ID do modelo](/docs/config/#models) na configuração do OpenVibe
+usa o formato `openvibe-go/<model-id>`. Por exemplo, para o Kimi K3, você usaria
+`openvibe-go/kimi-k3` na configuração.
 
 ---
 
@@ -458,7 +458,7 @@ usa o formato `opencode-go/<model-id>`. Por exemplo, para o Kimi K3, você usari
 Você pode buscar a lista completa de modelos disponíveis e seus metadados em:
 
 ```
-https://opencode.ai/zen/go/v1/models
+https://openvibe.ai/zen/go/v1/models
 ```
 
 ---
@@ -511,9 +511,9 @@ https://opencode.ai/zen/go/v1/models
 
 ## Objetivos
 
-Criamos o OpenCode Go para:
+Criamos o OpenVibe Go para:
 
 1. Tornar a programação com IA **acessível** a mais pessoas com uma assinatura de baixo custo.
 2. Fornecer acesso **confiável** aos melhores modelos abertos de programação.
 3. Selecionar modelos **testados e avaliados por benchmark** para uso por agentes de programação.
-4. Evitar **dependência de fornecedor**, permitindo que você também use qualquer outro provedor com o OpenCode.
+4. Evitar **dependência de fornecedor**, permitindo que você também use qualquer outro provedor com o OpenVibe.

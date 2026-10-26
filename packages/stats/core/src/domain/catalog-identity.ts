@@ -1,7 +1,4 @@
-import { statModel } from "./model-normalization"
-
-const CATALOG_URL = "https://models.opencode.ai/catalog.json"
-const STATS_PROVIDERS = ["opencode", "opencode-go"] as const
+const CATALOG_URL = "https://models.dev/catalog.json"
 const cache: { value?: CatalogIdentity; expiresAt?: number } = {}
 
 export type CatalogIdentity = {
@@ -26,36 +23,8 @@ export async function loadCatalogIdentity() {
 
 export function catalogIdentity(value: unknown): CatalogIdentity {
   if (!record(value) || !record(value.models) || !record(value.providers)) throw new Error("Invalid model catalog")
-  const models = value.models
-  const providers = value.providers
-
   const offerings = new Map<string, string>()
   const candidates = new Map<string, Set<string>>()
-  STATS_PROVIDERS.forEach((providerID) => {
-    const provider = providers[providerID]
-    if (!record(provider) || !record(provider.models)) return
-    Object.entries(provider.models).forEach(([modelID, model]) => {
-      if (!record(model)) return
-      const canonicalID =
-        typeof model.canonical_model_id === "string"
-          ? model.canonical_model_id
-          : modelID in models
-            ? modelID
-            : `${providerID}/${modelID}` in models
-              ? `${providerID}/${modelID}`
-              : undefined
-      if (!canonicalID || !(canonicalID in models)) return
-      const [lab, ...parts] = canonicalID.split("/")
-      if (!lab || parts.length === 0) return
-      const canonicalModel = parts.join("/")
-      offerings.set(`${providerID}/${modelID.toLowerCase()}`, lab)
-      ;[modelID, canonicalModel].forEach((name) => {
-        const normalized = statModel(name, undefined)
-        candidates.set(normalized, (candidates.get(normalized) ?? new Set()).add(lab))
-      })
-    })
-  })
-  if (offerings.size === 0) throw new Error("Model catalog has no canonical OpenCode offerings")
 
   return {
     offerings,

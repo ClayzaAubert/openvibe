@@ -1,16 +1,16 @@
-import { Database } from "@opencode-ai/core/database/database"
-import { LayerNode } from "@opencode-ai/core/effect/layer-node"
-import { httpClient } from "@opencode-ai/core/effect/app-node-platform"
-import { AppNodeBuilder } from "@opencode-ai/core/effect/app-node-builder"
-import { EventV2 } from "@opencode-ai/core/event"
-import { Credential } from "@opencode-ai/core/credential"
-import { PermissionSaved } from "@opencode-ai/core/permission/saved"
-import { PtyTicket } from "@opencode-ai/core/pty/ticket"
-import { SessionV2 } from "@opencode-ai/core/session"
-import { SessionExecution } from "@opencode-ai/core/session/execution"
-import { LocationServiceMap } from "@opencode-ai/core/location-service-map"
-import { SessionExecutionLocal } from "@opencode-ai/core/session/execution/local"
-import { ToolOutputStore } from "@opencode-ai/core/tool-output-store"
+import { Database } from "@openvibe-ai/core/database/database"
+import { LayerNode } from "@openvibe-ai/core/effect/layer-node"
+import { httpClient } from "@openvibe-ai/core/effect/app-node-platform"
+import { AppNodeBuilder } from "@openvibe-ai/core/effect/app-node-builder"
+import { EventV2 } from "@openvibe-ai/core/event"
+import { Credential } from "@openvibe-ai/core/credential"
+import { PermissionSaved } from "@openvibe-ai/core/permission/saved"
+import { PtyTicket } from "@openvibe-ai/core/pty/ticket"
+import { SessionV2 } from "@openvibe-ai/core/session"
+import { SessionExecution } from "@openvibe-ai/core/session/execution"
+import { LocationServiceMap } from "@openvibe-ai/core/location-service-map"
+import { SessionExecutionLocal } from "@openvibe-ai/core/session/execution/local"
+import { ToolOutputStore } from "@openvibe-ai/core/tool-output-store"
 import { HttpRouter, HttpServer } from "effect/unstable/http"
 import { HttpApiBuilder } from "effect/unstable/httpapi"
 import { Layer, Option } from "effect"
@@ -39,13 +39,13 @@ const applicationServices = LayerNode.group([
 export function createRoutes(password?: string) {
   return makeRoutes(
     password
-      ? ServerAuth.Config.configLayer({ username: "opencode", password: Option.some(password) })
+      ? ServerAuth.Config.configLayer({ username: "openvibe", password: Option.some(password) })
       : ServerAuth.Config.layer,
   )
 }
 
 export function createEmbeddedRoutes() {
-  return makeRoutes(ServerAuth.Config.configLayer({ username: "opencode", password: Option.none() }))
+  return makeRoutes(ServerAuth.Config.configLayer({ username: "openvibe", password: Option.none() }))
 }
 
 function makeRoutes<AuthError, AuthServices>(auth: Layer.Layer<ServerAuth.Config, AuthError, AuthServices>) {

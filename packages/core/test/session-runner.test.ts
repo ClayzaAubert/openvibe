@@ -8,53 +8,53 @@ import {
   InvalidRequestReason,
   type LLMClientShape,
   type LLMRequest,
-} from "@opencode-ai/llm"
-import * as OpenAIChat from "@opencode-ai/llm/protocols/openai-chat"
-import { Database } from "@opencode-ai/core/database/database"
-import { makeLocationNode } from "@opencode-ai/core/effect/app-node"
-import { AppNodeBuilder } from "@opencode-ai/core/effect/app-node-builder"
-import { LayerNodePlatform } from "@opencode-ai/core/effect/app-node-platform"
-import { LayerNode } from "@opencode-ai/core/effect/layer-node"
-import { EventV2 } from "@opencode-ai/core/event"
-import { PermissionV2 } from "@opencode-ai/core/permission"
-import { EventTable } from "@opencode-ai/core/event/sql"
-import { Project } from "@opencode-ai/core/project"
-import { ProjectTable } from "@opencode-ai/core/project/sql"
-import { QuestionV2 } from "@opencode-ai/core/question"
-import { AbsolutePath } from "@opencode-ai/core/schema"
-import { SessionV2 } from "@opencode-ai/core/session"
-import { Snapshot } from "@opencode-ai/core/snapshot"
-import { ContextSnapshotDecodeError } from "@opencode-ai/core/session/error"
-import { SessionEvent } from "@opencode-ai/core/session/event"
-import { SessionInput } from "@opencode-ai/core/session/input"
-import { SessionMessage } from "@opencode-ai/core/session/message"
-import { Prompt } from "@opencode-ai/core/session/prompt"
-import { SessionProjector } from "@opencode-ai/core/session/projector"
-import { SessionExecution } from "@opencode-ai/core/session/execution"
-import { SessionRunCoordinator } from "@opencode-ai/core/session/run-coordinator"
-import { SessionRunner } from "@opencode-ai/core/session/runner"
-import * as SessionRunnerLLM from "@opencode-ai/core/session/runner/llm"
-import { SessionRunnerModel } from "@opencode-ai/core/session/runner/model"
-import { ToolRegistry } from "@opencode-ai/core/tool/registry"
-import { ApplicationTools } from "@opencode-ai/core/tool/application-tools"
-import { AgentV2 } from "@opencode-ai/core/agent"
-import { Config } from "@opencode-ai/core/config"
-import { ConfigCompaction } from "@opencode-ai/core/config/compaction"
-import { Tool } from "@opencode-ai/core/tool/tool"
+} from "@openvibe-ai/llm"
+import * as OpenAIChat from "@openvibe-ai/llm/protocols/openai-chat"
+import { Database } from "@openvibe-ai/core/database/database"
+import { makeLocationNode } from "@openvibe-ai/core/effect/app-node"
+import { AppNodeBuilder } from "@openvibe-ai/core/effect/app-node-builder"
+import { LayerNodePlatform } from "@openvibe-ai/core/effect/app-node-platform"
+import { LayerNode } from "@openvibe-ai/core/effect/layer-node"
+import { EventV2 } from "@openvibe-ai/core/event"
+import { PermissionV2 } from "@openvibe-ai/core/permission"
+import { EventTable } from "@openvibe-ai/core/event/sql"
+import { Project } from "@openvibe-ai/core/project"
+import { ProjectTable } from "@openvibe-ai/core/project/sql"
+import { QuestionV2 } from "@openvibe-ai/core/question"
+import { AbsolutePath } from "@openvibe-ai/core/schema"
+import { SessionV2 } from "@openvibe-ai/core/session"
+import { Snapshot } from "@openvibe-ai/core/snapshot"
+import { ContextSnapshotDecodeError } from "@openvibe-ai/core/session/error"
+import { SessionEvent } from "@openvibe-ai/core/session/event"
+import { SessionInput } from "@openvibe-ai/core/session/input"
+import { SessionMessage } from "@openvibe-ai/core/session/message"
+import { Prompt } from "@openvibe-ai/core/session/prompt"
+import { SessionProjector } from "@openvibe-ai/core/session/projector"
+import { SessionExecution } from "@openvibe-ai/core/session/execution"
+import { SessionRunCoordinator } from "@openvibe-ai/core/session/run-coordinator"
+import { SessionRunner } from "@openvibe-ai/core/session/runner"
+import * as SessionRunnerLLM from "@openvibe-ai/core/session/runner/llm"
+import { SessionRunnerModel } from "@openvibe-ai/core/session/runner/model"
+import { ToolRegistry } from "@openvibe-ai/core/tool/registry"
+import { ApplicationTools } from "@openvibe-ai/core/tool/application-tools"
+import { AgentV2 } from "@openvibe-ai/core/agent"
+import { Config } from "@openvibe-ai/core/config"
+import { ConfigCompaction } from "@openvibe-ai/core/config/compaction"
+import { Tool } from "@openvibe-ai/core/tool/tool"
 import {
   SessionContextEpochTable,
   SessionInputTable,
   SessionMessageTable,
   SessionTable,
-} from "@opencode-ai/core/session/sql"
-import { SessionStore } from "@opencode-ai/core/session/store"
-import { SystemContext } from "@opencode-ai/core/system-context"
-import { SystemContextRegistry } from "@opencode-ai/core/system-context/registry"
-import { SkillGuidance } from "@opencode-ai/core/skill/guidance"
-import { ReferenceGuidance } from "@opencode-ai/core/reference/guidance"
-import { ModelV2 } from "@opencode-ai/core/model"
-import { Location } from "@opencode-ai/core/location"
-import { ProviderV2 } from "@opencode-ai/core/provider"
+} from "@openvibe-ai/core/session/sql"
+import { SessionStore } from "@openvibe-ai/core/session/store"
+import { SystemContext } from "@openvibe-ai/core/system-context"
+import { SystemContextRegistry } from "@openvibe-ai/core/system-context/registry"
+import { SkillGuidance } from "@openvibe-ai/core/skill/guidance"
+import { ReferenceGuidance } from "@openvibe-ai/core/reference/guidance"
+import { ModelV2 } from "@openvibe-ai/core/model"
+import { Location } from "@openvibe-ai/core/location"
+import { ProviderV2 } from "@openvibe-ai/core/provider"
 import { Cause, DateTime, Deferred, Effect, Exit, Fiber, Layer, Schema, Stream } from "effect"
 import { asc, eq } from "drizzle-orm"
 import { testEffect } from "./lib/effect"
@@ -1103,12 +1103,12 @@ describe("SessionRunnerLLM", () => {
       expect(requests).toHaveLength(2)
       expect(requests.map((request) => request.http?.headers)).toEqual([
         {
-          "x-opencode-session-id": sessionID,
+          "x-openvibe-session-id": sessionID,
           "x-session-affinity": sessionID,
           "X-Session-Id": sessionID,
         },
         {
-          "x-opencode-session-id": sessionID,
+          "x-openvibe-session-id": sessionID,
           "x-session-affinity": sessionID,
           "X-Session-Id": sessionID,
         },
@@ -2530,7 +2530,7 @@ describe("SessionRunnerLLM", () => {
       yield* session.resume(sessionID)
 
       expect(requests[0]?.http?.headers).toEqual({
-        "x-opencode-session-id": sessionID,
+        "x-openvibe-session-id": sessionID,
         "x-session-affinity": sessionID,
         "X-Session-Id": sessionID,
       })
@@ -2555,8 +2555,8 @@ describe("SessionRunnerLLM", () => {
       yield* session.resume(sessionID)
 
       expect(requests[0]?.http?.headers).toEqual({
-        "x-opencode-session-id": sessionID,
-        "x-opencode-parent-session-id": parentID,
+        "x-openvibe-session-id": sessionID,
+        "x-openvibe-parent-session-id": parentID,
         "x-session-affinity": sessionID,
         "X-Session-Id": sessionID,
         "x-parent-session-id": parentID,
